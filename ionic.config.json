@@ -1,0 +1,7 @@
+{
+  "name": "clicker-frontend",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
