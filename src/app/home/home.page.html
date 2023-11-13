@@ -1,20 +1,33 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" color="dark" >
+  <ion-fab slot="fixed" vertical="top" horizontal="end" >
+    <ion-fab-button size="small" color="light">
+      <ion-icon name="close"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-grid (click)="addClick()">
+    <ion-row>
+      <ion-col size="10">
+        <ion-item lines="none" color="medium">
+          <ion-avatar aria-hidden="true" slot="start">
+            <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+          <ion-label>
+            <h3><b>Galowillian</b></h3>
+            <p><b>$ {{ money.toFixed(2) }}</b></p>
+          </ion-label>
+          <ion-button class="ion-no-margin" size="larger" color="dark">Profile</ion-button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item color="dark">
+          <ion-badge class="ion-margin-end" color="danger">LIVE</ion-badge>
+          <ion-icon style="margin-right: 5px;" name="eye-outline"></ion-icon>
+          <ion-label>{{ viewers }}</ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
