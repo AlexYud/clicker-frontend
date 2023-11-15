@@ -1,5 +1,5 @@
-<ion-content [fullscreen]="true" color="dark" >
-  <ion-fab slot="fixed" vertical="top" horizontal="end" >
+<ion-content [fullscreen]="true" color="dark">
+  <ion-fab slot="fixed" vertical="top" horizontal="end">
     <ion-fab-button size="small" color="light">
       <ion-icon name="close"></ion-icon>
     </ion-fab-button>
@@ -13,10 +13,10 @@
             <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
           </ion-avatar>
           <ion-label>
-            <h3><b>Galowillian</b></h3>
+            <h3><b>{{ playerName }}</b></h3>
             <p><b>$ {{ money.toFixed(2) }}</b></p>
           </ion-label>
-          <ion-button class="ion-no-margin" size="larger" color="dark">Profile</ion-button>
+          <ion-button class="ion-no-margin" size="larger" color="dark" (click)="openProfileModal()">Profile</ion-button>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -26,6 +26,43 @@
           <ion-badge class="ion-margin-end" color="danger">LIVE</ion-badge>
           <ion-icon style="margin-right: 5px;" name="eye-outline"></ion-icon>
           <ion-label>{{ viewers }}</ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col style="height: 25vh;">
+        <!-- <ion-card color="light" style="height: 20vh;">
+          test
+        </ion-card> -->
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col style="height: 15vh;">
+        <ion-item *ngFor="let tip of tips" lines="none" color="dark">
+          <ion-avatar aria-hidden="true" slot="start">
+            <img alt="viewer img" src="{{tip.img}}"/>
+          </ion-avatar>
+          <ion-label>
+            <h3><b>{{tip.name}}</b></h3>
+            <ion-note style="font-size: 0.65em;">Enviou um {{tip.icon}}</ion-note>
+          </ion-label>
+          <ion-icon size="large" color="warning" name="{{tip.icon}}" style="font-size: 20em;"></ion-icon>
+          <ion-title><i>x{{tip.multiplier}}</i></ion-title>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="height: 35vh;">
+      <ion-col class="ion-align-self-end">
+        <ion-item *ngFor="let viewer of chat" lines="none" color="dark">
+          <ion-avatar aria-hidden="true" slot="start">
+            <img alt="viewer img" src="{{viewer.img}}" />
+          </ion-avatar>
+          <ion-label>
+            <h3>{{viewer.name}}</h3>
+            <p><b>{{viewer.comment}}</b></p>
+          </ion-label>
         </ion-item>
       </ion-col>
     </ion-row>
