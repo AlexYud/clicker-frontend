@@ -33,8 +33,8 @@ export class HomePage {
   async openProfileModal() {
     const modal = await this.modalCtrl.create({
       component: ProfileComponent,
-      initialBreakpoint: 0.75,
-      breakpoints: [0, 0.25, 0.5, 0.75],
+      initialBreakpoint: 0.85,
+      breakpoints: [0, 0.45, 0.65, 0.85],
     });
     modal.present();
     await modal.onWillDismiss();

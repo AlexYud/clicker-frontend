@@ -8,7 +8,7 @@
   <ion-grid (click)="addClick()">
     <ion-row>
       <ion-col size="10">
-        <ion-item lines="none" color="medium">
+        <ion-item lines="none" color="dark">
           <ion-avatar aria-hidden="true" slot="start">
             <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
           </ion-avatar>
@@ -16,13 +16,13 @@
             <h3><b>{{ playerName }}</b></h3>
             <p><b>$ {{ money.toFixed(2) }}</b></p>
           </ion-label>
-          <ion-button class="ion-no-margin" size="larger" color="dark" (click)="openProfileModal()">Profile</ion-button>
+          <ion-button class="ion-no-margin" size="larger" color="light" (click)="openProfileModal()">Profile</ion-button>
         </ion-item>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-item color="dark">
+        <ion-item lines="none" color="dark">
           <ion-badge class="ion-margin-end" color="danger">LIVE</ion-badge>
           <ion-icon style="margin-right: 5px;" name="eye-outline"></ion-icon>
           <ion-label>{{ viewers }}</ion-label>
