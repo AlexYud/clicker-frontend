@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ProfileComponent } from '../components/profile/profile.component';
+import { DataService } from '../services/data.service';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-home',
@@ -8,26 +11,33 @@ import { ProfileComponent } from '../components/profile/profile.component';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  public viewersSubscription: Subscription = this.dataService.getViewers().subscribe((viewers: number) => this.viewers = viewers);
+  public moneySubscription: Subscription = this.dataService.getMoney().subscribe((money: number) => this.money = money);
 
-  public viewers: number = 50;
-  public viewersPerSecond: number = 0;
+  public viewers: number = 0;
   public money: number = 0;
-  public moneyPerSecond: number = 2;
+  
   public playerName: string = 'Galowillian';
-  public tipMultiplier: number = 0;
+
   public chat: any[] = [
   ];
   public tips: any[] = [
-  ]
+  ];
 
   constructor(
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private dataService: DataService,
   ) { }
 
   ngOnInit() {
-    this.autoClicker();
+    this.dataService.autoClicker();
     this.updateChat();
     this.updateTip();
+  }
+
+  ngOnDestroy() {
+    this.viewersSubscription.unsubscribe();
+    this.moneySubscription.unsubscribe();
   }
 
   async openProfileModal() {
@@ -41,7 +51,7 @@ export class HomePage {
   }
 
   addClick() {
-    this.viewers += 1;
+    this.dataService.addViewer();
   }
 
   addMoney() {
@@ -165,14 +175,17 @@ export class HomePage {
   }
 
   updateChat() {
-    var chance: number = 99;
+    var chance: number = 100;
     setInterval(() => {
       switch (true) {
-        case this.viewers < 50:
-          chance = 99
+        case this.viewers < 30:
+          chance = 100
+          break;
+        case this.viewers < 100:
+          chance = 98
           break;
         case this.viewers < 200:
-          chance = 97
+          chance = 96
           break;
         case this.viewers < 500:
           chance = 95
@@ -231,25 +244,13 @@ export class HomePage {
         const currentTimestamp = new Date();
         const diff = (currentTimestamp.getTime() - tipTimestamp.getTime()) / 1000;
 
-        if (diff >= 5) {
+        if (diff >= 10) {
           this.tips.shift()
         }
       }
 
       if (Math.floor(Math.random() * 100) > chance) this.addTip();
     }, 1000);
-  }
-
-  autoClicker() {
-    setInterval(() => {
-      if (this.viewers >= 50) {
-        this.viewersPerSecond = Math.floor(this.viewers / 100) == 0 ? 1 : Math.floor(this.viewers / 100);
-        this.viewers += this.viewersPerSecond;
-      }
-      if (this.viewers >= 100) {
-        if (Math.floor(Math.random() * 10) > 7) this.addMoney();
-      }
-    }, 400);
   }
 
 }
