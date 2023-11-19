@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../../services/data.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -6,6 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent  implements OnInit {
+  public viewersSubscription: Subscription = this.dataService.getViewers().subscribe((viewers: number) => this.viewers = viewers);
+  public viewers: number = this.dataService.getViewersValue();
+  
+  public money: number = 0;
+  public moneySubscription: Subscription = this.dataService.getMoney().subscribe((money: number) => this.money = money);
+
   public items: any[] = [
     {
       id: 0,
@@ -13,6 +21,7 @@ export class ProfileComponent  implements OnInit {
       name: 'Glasses',
       views: 100,
       price: 10,
+      unlockable: 100,
     },
     {
       id: 1,
@@ -20,6 +29,7 @@ export class ProfileComponent  implements OnInit {
       name: 'Ring Light',
       views: 200,
       price: 50,
+      unlockable: 500,
     },
     {
       id: 2,
@@ -27,6 +37,7 @@ export class ProfileComponent  implements OnInit {
       name: 'Tripod',
       views: 500,
       price: 100,
+      unlockable: 2000,
     },
     {
       id: 3,
@@ -34,6 +45,7 @@ export class ProfileComponent  implements OnInit {
       name: 'Mic',
       views: 1500,
       price: 250,
+      unlockable: 5000,
     },
     {
       id: 4,
@@ -41,11 +53,25 @@ export class ProfileComponent  implements OnInit {
       name: 'Phone',
       views: 3000,
       price: 500,
+      unlockable: 20000,
     },
   ]
 
-  constructor() { }
+  constructor(
+    private dataService: DataService,
+  ) { }
 
   ngOnInit() {}
+
+  ngOnDestroy() {
+    this.viewersSubscription.unsubscribe();
+    this.moneySubscription.unsubscribe();
+  }
+  
+
+  buyItem(item: any) {
+    this.dataService.updateViewersPerSecond(item.views);
+    this.dataService.updateMoney(-item.price)
+  }
 
 }

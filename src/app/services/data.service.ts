@@ -14,8 +14,16 @@ export class DataService {
 
   constructor() { }
 
+  getViewersValue() {
+    return this.viewers.value;
+  }
+
   updateViewers(viewers: number) {
     this.viewers.next(viewers);
+  }
+
+  updateViewersPerSecond(viewersPerSecond: number) {
+    this.viewersPerSecond += viewersPerSecond;
   }
 
   getViewers() {
@@ -26,20 +34,14 @@ export class DataService {
     return this.money.asObservable();
   }
 
-  addViewer() {
-    this.updateViewers(this.viewers.value + 1);
-  }
-
   autoClicker() {
     setInterval(() => {
       this.updateViewers(this.viewers.value + this.viewersPerSecond);
-      if (this.viewers.value >= 100) {
-        if (Math.floor(Math.random() * 10) > 7) this.updateMoney(this.money.value + this.moneyPerSecond);
-      }
+      if (this.viewers.value >= 50 && Math.floor(Math.random() * 10) > 8) this.updateMoney(1);
     }, 400);
   }
 
   updateMoney(money: number) {
-    this.money.next(money);
+    this.money.next(money + this.money.value);
   }
 }

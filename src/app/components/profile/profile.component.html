@@ -20,10 +20,15 @@
           <h2><b>{{ item.name }}</b></h2>
           <p>{{ item.views }} viewers/s</p>
         </ion-label>
-        <ion-button color="success" size="small">
-          <ion-label>
+        <ion-button color="success" *ngIf="viewers > item.unlockable" size="small" [disabled]="item.price > money" (click)="buyItem(item)">
+          <ion-label style="width: 90px; height: 50px">
             <h6><b>Upgrade</b></h6>
             <h1><b>$ {{ item.price }}</b></h1>
+          </ion-label>
+        </ion-button>
+        <ion-button color="danger" size="small" *ngIf="item.unlockable >= viewers">
+          <ion-label *ngIf="item.unlockable >= viewers" style="width: 90px; height: 50px; display: flex" class="ion-justify-content-center ion-align-items-center">
+              <ion-icon name="lock-closed" size="large"></ion-icon>
           </ion-label>
         </ion-button>
       </ion-item>

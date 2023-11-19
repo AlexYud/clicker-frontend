@@ -51,11 +51,11 @@ export class HomePage {
   }
 
   addClick() {
-    this.dataService.addViewer();
+    this.dataService.updateViewers(this.viewers + 1);
   }
 
-  addMoney() {
-    this.money += 1;
+  addMoney(money: number) {
+    this.dataService.updateMoney(money);
   }
 
   addChat() {
@@ -160,8 +160,7 @@ export class HomePage {
     const donation = donationIcons[Math.floor(Math.random() * donationIcons.length)]
     const multiplier = Math.floor(Math.random() * 4) + 1;
 
-    this.money += multiplier * donation.value
-
+    this.addMoney(multiplier * donation.value)
 
     this.tips.shift();
     this.tips.push({
@@ -252,5 +251,4 @@ export class HomePage {
       if (Math.floor(Math.random() * 100) > chance) this.addTip();
     }, 1000);
   }
-
 }
