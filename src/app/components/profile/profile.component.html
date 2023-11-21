@@ -1,15 +1,19 @@
-<ion-content color="medium">
-  <ion-card class="ion-margin-top">
-    <ion-card-header class="ion-text-center">
-      <ion-title>
-        <ion-icon class="ion-margin-end" name="flash-outline" size="medium"></ion-icon>
-        <ion-icon class="ion-margin-end" name="headset-outline" size="medium"></ion-icon>
-        <b class="ion-margin-end">STORE</b>
-        <ion-icon class="ion-margin-end" name="mic-outline" size="medium"></ion-icon>
-        <ion-icon name="glasses-outline" size="medium"></ion-icon>
-      </ion-title>
-    </ion-card-header>
+<ion-content class="ion-margin" color="medium">
+
+  <ion-card >
+    <ion-segment value="pricetags" (ionChange)="segmentChanged($event)">
+      <ion-segment-button class="ion-no-margin ion-no-padding" value="pricetags">
+        <ion-icon name="pricetags" ></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button [disabled]="true" class="ion-no-margin ion-no-padding" value="cash">
+        <ion-icon name="cash" ></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button [disabled]="true" class="ion-no-margin ion-no-padding" value="sparkles">
+        <ion-icon name="sparkles" ></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
   </ion-card>
+    
   <ion-card class="ion-margin-top">
     <ion-list>
       <ion-item *ngFor="let item of items" lines="none">
@@ -26,7 +30,7 @@
             <h1><b>$ {{ item.price }}</b></h1>
           </ion-label>
         </ion-button>
-        <ion-button color="danger" size="small" *ngIf="item.unlockable >= viewers">
+        <ion-button color="danger" size="small" *ngIf="item.unlockable >= viewers" >
           <ion-label *ngIf="item.unlockable >= viewers" style="width: 90px; height: 50px; display: flex" class="ion-justify-content-center ion-align-items-center">
               <ion-icon name="lock-closed" size="large"></ion-icon>
           </ion-label>
