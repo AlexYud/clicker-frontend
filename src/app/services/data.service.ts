@@ -37,7 +37,13 @@ export class DataService {
   autoClicker() {
     setInterval(() => {
       this.updateViewers(this.viewers.value + this.viewersPerSecond);
-      if (this.viewers.value >= 50 && Math.floor(Math.random() * 10) > 8) this.updateMoney(1);
+      if (this.viewers.value >= 50) {
+        const probability = 0.2 + (this.viewers.value / 2000)
+        if (Math.random() < probability) {
+          const moneyEarned = Math.floor(1 * Math.sqrt(1 + this.viewers.value / 200));
+          this.updateMoney(moneyEarned);
+        }
+      }
     }, 400);
   }
 
