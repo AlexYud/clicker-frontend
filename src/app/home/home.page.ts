@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { ChatService } from '../services/chat.service';
 import { TipService } from '../services/tip.service';
 import { App } from '@capacitor/app';
+import { CameraPreview, CameraPreviewOptions } from '@capacitor-community/camera-preview';
 
 
 @Component({
@@ -40,6 +41,15 @@ export class HomePage {
     this.chatService.createSpectators();
     this.updateChat();
     this.updateTip();
+    const cameraPreviewOptions: CameraPreviewOptions = {
+      position: 'front',
+      parent: "cameraPreview",
+      toBack: true,
+      lockAndroidOrientation: true,
+      height: window.screen.height,
+      disableAudio: true,
+    };
+    CameraPreview.start(cameraPreviewOptions);
   }
 
   ngOnDestroy() {
