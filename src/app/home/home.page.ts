@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController, Platform } from '@ionic/angular';
+import { IonRouterOutlet, ModalController, Platform } from '@ionic/angular';
 import { ProfileComponent } from '../components/profile/profile.component';
 import { DataService } from '../services/data.service';
 import { Subscription } from 'rxjs';
@@ -20,16 +20,15 @@ export class HomePage {
 
   public viewers: number = 0;
   public money: number = 0;
-  
+
   public playerName: string = 'Galowillian';
 
-  public chat: any[] = [
-  ];
-  public lastTip: any[] = [
-  ];
+  public chat: any[] = [];
+  public lastTip: any[] = [];
 
   constructor(
     private platform: Platform,
+    private routerOutlet: IonRouterOutlet,
     private modalCtrl: ModalController,
     private dataService: DataService,
     private chatService: ChatService,
@@ -57,8 +56,13 @@ export class HomePage {
     this.moneySubscription.unsubscribe();
   }
 
-  closeGame(){
-    App.exitApp();
+  closeGame() {
+    this.platform.backButton.subscribeWithPriority(-1, () => {
+      if (!this.routerOutlet?.canGoBack()) {
+        alert('Exit app');
+        App.exitApp();
+      }
+    });
   }
 
   async openProfileModal() {
