@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
-import { IonRouterOutlet, ModalController, Platform } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { ProfileComponent } from '../components/profile/profile.component';
 import { DataService } from '../services/data.service';
 import { Subscription } from 'rxjs';
 import { ChatService } from '../services/chat.service';
 import { TipService } from '../services/tip.service';
-import { App } from '@capacitor/app';
 import { CameraPreview, CameraPreviewOptions } from '@capacitor-community/camera-preview';
-
 
 @Component({
   selector: 'app-home',
@@ -26,9 +24,9 @@ export class HomePage {
   public chat: any[] = [];
   public lastTip: any[] = [];
 
+  public isCameraOn: boolean = true;
+
   constructor(
-    private platform: Platform,
-    private routerOutlet: IonRouterOutlet,
     private modalCtrl: ModalController,
     private dataService: DataService,
     private chatService: ChatService,
@@ -40,6 +38,34 @@ export class HomePage {
     this.chatService.createSpectators();
     this.updateChat();
     this.updateTip();
+  }
+
+  ngOnDestroy() {
+    this.viewersSubscription.unsubscribe();
+    this.moneySubscription.unsubscribe();
+  }
+
+  mathFloor(value: number) {
+    return Math.floor(value);
+  }
+
+  async openProfileModal() {
+    const modal = await this.modalCtrl.create({
+      component: ProfileComponent,
+      initialBreakpoint: 0.75,
+      breakpoints: [0, 0.75],
+    });
+    modal.present();
+    await modal.onWillDismiss();
+  }
+
+  toggleCamera() {
+    this.isCameraOn = !this.isCameraOn;
+    if (this.isCameraOn) return this.stopCamera();
+    return this.startCamera();
+  }
+
+  startCamera() {
     const cameraPreviewOptions: CameraPreviewOptions = {
       position: 'front',
       parent: "cameraPreview",
@@ -51,28 +77,8 @@ export class HomePage {
     CameraPreview.start(cameraPreviewOptions);
   }
 
-  ngOnDestroy() {
-    this.viewersSubscription.unsubscribe();
-    this.moneySubscription.unsubscribe();
-  }
-
-  closeGame() {
-    this.platform.backButton.subscribeWithPriority(-1, () => {
-      if (!this.routerOutlet?.canGoBack()) {
-        alert('Exit app');
-        App.exitApp();
-      }
-    });
-  }
-
-  async openProfileModal() {
-    const modal = await this.modalCtrl.create({
-      component: ProfileComponent,
-      initialBreakpoint: 0.9,
-      breakpoints: [0, 0.45, 0.65, 0.9],
-    });
-    modal.present();
-    await modal.onWillDismiss();
+  stopCamera() {
+    CameraPreview.stop();
   }
 
   addClick() {

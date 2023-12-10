@@ -10,7 +10,7 @@ export class ItemService {
       id: 0,
       img: 'https://ionicframework.com/docs/img/demos/thumbnail.svg',
       name: 'Glasses',
-      views: 10,
+      views: 1,
       price: 10,
       unlockable: 100,
     },
@@ -18,7 +18,7 @@ export class ItemService {
       id: 1,
       img: 'https://ionicframework.com/docs/img/demos/thumbnail.svg',
       name: 'Ring Light',
-      views: 20,
+      views: 2,
       price: 25,
       unlockable: 500,
     },
@@ -26,7 +26,7 @@ export class ItemService {
       id: 2,
       img: 'https://ionicframework.com/docs/img/demos/thumbnail.svg',
       name: 'Tripod',
-      views: 40,
+      views: 4,
       price: 60,
       unlockable: 2000,
     },
@@ -34,7 +34,7 @@ export class ItemService {
       id: 3,
       img: 'https://ionicframework.com/docs/img/demos/thumbnail.svg',
       name: 'Mic',
-      views: 80,
+      views: 8,
       price: 160,
       unlockable: 5000,
     },
@@ -42,7 +42,7 @@ export class ItemService {
       id: 4,
       img: 'https://ionicframework.com/docs/img/demos/thumbnail.svg',
       name: 'Phone',
-      views: 160,
+      views: 16,
       price: 400,
       unlockable: 20000,
     },
@@ -61,6 +61,6 @@ export class ItemService {
     this.dataService.updateViewersPerSecond(item.views);
     this.dataService.updateMoney(-item.price);
     item.price += Math.floor(item.price * 0.5);
-    item.views += Math.floor(item.views * 0.2);
+    item.views += (item.views * 0.2);
   }
 }

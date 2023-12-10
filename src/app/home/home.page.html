@@ -1,8 +1,8 @@
-<ion-content [scrollY]="false" [fullscreen]="true" >
+<ion-content [scrollY]="false" [fullscreen]="true">
   <div id="cameraPreview" (click)="addClick()">
   <ion-fab slot="fixed" vertical="top" horizontal="end">
-    <ion-fab-button size="small" color="light">
-      <ion-icon name="close"></ion-icon>
+    <ion-fab-button size="small" color="light" (click)="toggleCamera()">
+      <ion-icon name="camera-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
  
@@ -14,10 +14,10 @@
             <img alt="avatar" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
           </ion-avatar>
           <ion-label>
-            <h3><b>{{ playerName }}</b></h3>
-            <ion-text color="dark"><p><b>$ {{ money.toFixed(2) }}</b></p></ion-text>
+            <h3><b><ion-text color="medium">{{ playerName }}</ion-text></b></h3>
+            <p><b><ion-text color="light">$ {{ money.toFixed(2) }}</ion-text></b></p>
           </ion-label>
-          <ion-button class="ion-no-margin" size="larger" color="light" (click)="openProfileModal()">Profile</ion-button>
+          <ion-button class="ion-no-margin" size="larger" color="light" (click)="openProfileModal()">Upgrade</ion-button>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -25,8 +25,8 @@
       <ion-col>
         <ion-item lines="none">
           <ion-badge class="ion-margin-end" color="danger">LIVE</ion-badge>
-          <ion-icon style="margin-right: 5px;" name="eye-outline"></ion-icon>
-          <ion-label>{{ viewers }}</ion-label>
+          <ion-icon style="margin-right: 5px;" name="eye-outline" color="light"></ion-icon>
+          <ion-label><ion-text color="light">{{ mathFloor(viewers) }}</ion-text></ion-label>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -42,11 +42,11 @@
             <img alt="viewer img" src="{{tip.img}}"/>
           </ion-avatar>
           <ion-label>
-            <h3><b>{{tip.name}}</b></h3>
-            <ion-note style="font-size: 0.65em;">Enviou um {{tip.icon}}</ion-note>
+            <h3><b><ion-text color="medium">{{tip.name}}</ion-text></b></h3>
+            <ion-note style="font-size: 0.65em;"><ion-text color="light">Enviou um {{tip.icon}}</ion-text></ion-note>
           </ion-label>
           <ion-icon size="large" color="warning" name="{{tip.icon}}" style="font-size: 20em;"></ion-icon>
-          <ion-title><i>x{{tip.multiplier}}</i></ion-title>
+          <ion-title><i><ion-text color="warning">x{{tip.multiplier}}</ion-text></i></ion-title>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -58,8 +58,8 @@
             <img alt="viewer img" src="{{viewer.img}}" />
           </ion-avatar>
           <ion-label>
-            <h3>{{viewer.name}}</h3>
-            <p><b>{{viewer.comment}}</b></p>
+            <h3><ion-text color="medium">{{viewer.name}}</ion-text></h3>
+            <p><ion-text color="light">{{viewer.comment}}</ion-text></p>
           </ion-label>
         </ion-item>
       </ion-col>
