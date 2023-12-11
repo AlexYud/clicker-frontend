@@ -22,7 +22,7 @@
         </ion-thumbnail>
         <ion-label>
           <h2><b>{{ item.name }}</b></h2>
-          <p>+{{ item.views }} viewers/s</p>
+          <p>+{{ isInteger(item.views) }} viewers/s</p>
         </ion-label>
         <ion-button color="success" *ngIf="viewers > item.unlockable" size="small" [disabled]="item.price > money" (click)="buyItem(item)">
           <ion-label style="width: 90px; height: 50px">

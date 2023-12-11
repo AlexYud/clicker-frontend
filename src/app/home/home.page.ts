@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { ChatService } from '../services/chat.service';
 import { TipService } from '../services/tip.service';
 import { CameraPreview, CameraPreviewOptions } from '@capacitor-community/camera-preview';
+import { UtilsService } from '../services/utils.service';
 
 @Component({
   selector: 'app-home',
@@ -31,6 +32,7 @@ export class HomePage {
     private dataService: DataService,
     private chatService: ChatService,
     private tipService: TipService,
+    private utilsService: UtilsService,
   ) { }
 
   ngOnInit() {
@@ -46,7 +48,7 @@ export class HomePage {
   }
 
   mathFloor(value: number) {
-    return Math.floor(value);
+    return this.utilsService.mathFloor(value);
   }
 
   async openProfileModal() {
@@ -59,13 +61,13 @@ export class HomePage {
     await modal.onWillDismiss();
   }
 
-  toggleCamera() {
+  async toggleCamera() {
     this.isCameraOn = !this.isCameraOn;
-    if (this.isCameraOn) return this.stopCamera();
-    return this.startCamera();
+    if (this.isCameraOn) return await this.stopCamera();
+    return await this.startCamera();
   }
 
-  startCamera() {
+  async startCamera() {
     const cameraPreviewOptions: CameraPreviewOptions = {
       position: 'front',
       parent: "cameraPreview",
@@ -74,11 +76,11 @@ export class HomePage {
       height: window.screen.height,
       disableAudio: true,
     };
-    CameraPreview.start(cameraPreviewOptions);
+    await CameraPreview.start(cameraPreviewOptions);
   }
 
-  stopCamera() {
-    CameraPreview.stop();
+  async stopCamera() {
+    await CameraPreview.stop();
   }
 
   addClick() {

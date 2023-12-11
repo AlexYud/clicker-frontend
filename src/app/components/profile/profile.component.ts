@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Subscription } from 'rxjs';
 import { ItemService } from 'src/app/services/item.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-profile',
@@ -31,10 +32,14 @@ export class ProfileComponent  implements OnInit {
 
   segmentChanged(event: any) {
     // console.log(event.target.value);
-    
   }
 
   buyItem(item: any) {
     this.itemService.buyItem(item);
+  }
+
+  isInteger(value: number) {
+    if (Number.isInteger(value)) return value;
+    return value.toFixed(2);
   }
 }

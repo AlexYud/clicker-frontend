@@ -36,5 +36,9 @@ export class UtilsService {
     toast.present();
   }
 
+  mathFloor(value: number) {
+    return Math.floor(value);
+  }
+
   // numberMask(value: number) { }
 }
