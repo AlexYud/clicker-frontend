@@ -6,9 +6,11 @@ import { ChatService } from './chat.service';
 })
 export class TipService {
   private tips = [
-    { name: 'pizza', value: 10 }, 
-    { name: 'planet', value: 25 }, 
-    { name: 'rocket', value: 50 }
+    { name: 'ice-cream', value: 10 }, 
+    { name: 'pizza', value: 25 }, 
+    { name: 'rocket', value: 50 },
+    { name: 'planet', value: 100 },
+    { name: 'diamond', value: 500 },
   ];
 
   constructor(
@@ -16,21 +18,16 @@ export class TipService {
   ) { }
 
   getRandomTip() {
-    var chance: number = Math.floor(Math.random() * 100);
+    var chance: number = Math.floor(Math.random() * 100) + 1;
     var tip = this.tips[0];
     
     switch (true) {
-      case chance < 10:
-        tip = this.tips[2];
-        break;
-      case chance < 50:
-        tip = this.tips[1];
-        break;
-      case chance < 100:
-        tip = this.tips[0];
-        break;
-      default:
-        break;
+      case chance < 2: tip = this.tips[4]; break;
+      case chance < 6: tip = this.tips[3]; break;
+      case chance < 11: tip = this.tips[2]; break;
+      case chance < 51: tip = this.tips[1]; break;
+      case chance < 101: tip = this.tips[0]; break;
+      default: break;
     }
 
     chance = Math.floor(Math.random() * 100);

@@ -51,7 +51,6 @@ export class ItemService {
   constructor(
     private dataService: DataService,
   ) { }
-
   
   getItems() {
     return this.items;
