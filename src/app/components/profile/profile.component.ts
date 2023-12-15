@@ -21,8 +21,6 @@ export class ProfileComponent implements OnInit {
 
   public items: any[] = this.itemService.getItems();
 
-  public multiplier: number = 1;
-
   constructor(
     private dataService: DataService,
     private itemService: ItemService,
