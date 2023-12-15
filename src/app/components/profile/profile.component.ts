@@ -21,6 +21,8 @@ export class ProfileComponent implements OnInit {
 
   public items: any[] = this.itemService.getItems();
 
+  public multiplier: number = 1;
+
   constructor(
     private dataService: DataService,
     private itemService: ItemService,
@@ -31,6 +33,26 @@ export class ProfileComponent implements OnInit {
   ngOnDestroy() {
     this.viewersSubscription.unsubscribe();
     this.moneySubscription.unsubscribe();
+  }
+
+  handleMultiplier(multiplier: number) {
+    let tab = document.getElementById('multiplierTab');
+    let currentButton = <HTMLElement> tab?.querySelector("ion-button.activated");
+    
+
+    if (currentButton && !currentButton.innerText.includes(multiplier.toString())) {
+      this.multiplier = multiplier
+      currentButton.classList.remove('activated')
+      let buttons = tab?.getElementsByTagName('ion-button')
+  
+      if (buttons) {
+        for (let i = 0; i < buttons?.length; i++) {
+          if (buttons[i].innerText.includes(multiplier.toString() + 'X')) {
+            buttons[i].classList.add('activated')
+          } 
+        }
+      }
+    } 
   }
 
   segmentChanged(event: any) {

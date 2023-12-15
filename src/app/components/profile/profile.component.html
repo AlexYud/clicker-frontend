@@ -24,6 +24,17 @@
       </ion-col>
       <ion-col size="8" style="display: flex;">
       </ion-col>
+      <div id="multiplierTab" style="display: flex;">
+        <ion-button style="margin-right: 0;" class="multiplier-button-left activated" (click)="handleMultiplier(1)">
+         1x
+        </ion-button>
+        <ion-button  expand="full" style="margin-left: 0;  margin-right: 0;" class="multiplier-button-middle"(click)="handleMultiplier(5)">
+         5x
+        </ion-button>
+        <ion-button style="margin-left: 0;" class="multiplier-button-right"(click)="handleMultiplier(10)">
+         10x
+        </ion-button>
+      </div>
     </ion-row>
     <ion-list>
       <ion-item *ngFor=" let item of items" lines="none">

@@ -1,0 +1,26 @@
+.multiplier-button-left {
+    --box-shadow: none;
+    width: 43px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    --border-radius: 10px 0px 0px 10px;
+}
+
+.multiplier-button-middle {
+    --box-shadow: none;
+    width: 40px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.multiplier-button-right {
+    --box-shadow: none;
+    width: 43px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    --border-radius: 0px 10px 10px 0px;
+}
+
+.activated {
+    --background: rgb(17, 72, 132);
+}
