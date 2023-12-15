@@ -12,7 +12,7 @@ export class ItemService {
       name: 'Glasses',
       views: 1,
       price: 10,
-      unlockable: 100,
+      unlock: 100,
     },
     {
       id: 1,
@@ -20,7 +20,7 @@ export class ItemService {
       name: 'Ring Light',
       views: 2,
       price: 25,
-      unlockable: 500,
+      unlock: 500,
     },
     {
       id: 2,
@@ -28,7 +28,7 @@ export class ItemService {
       name: 'Tripod',
       views: 4,
       price: 60,
-      unlockable: 2000,
+      unlock: 2000,
     },
     {
       id: 3,
@@ -36,7 +36,7 @@ export class ItemService {
       name: 'Mic',
       views: 8,
       price: 160,
-      unlockable: 5000,
+      unlock: 5000,
     },
     {
       id: 4,
@@ -44,7 +44,7 @@ export class ItemService {
       name: 'Phone',
       views: 16,
       price: 400,
-      unlockable: 20000,
+      unlock: 20000,
     },
   ]
 

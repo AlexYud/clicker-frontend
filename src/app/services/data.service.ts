@@ -10,15 +10,17 @@ export class DataService {
   private money: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   private moneyPerSecond: number = 0;
 
- 
-
   constructor() { }
 
-  getViewersValue() {
+  getViewersPerSecond(): number {
+    return this.viewersPerSecond;
+  }
+
+  getViewersValue(): number {
     return this.viewers.value;
   }
 
-  updateViewers(viewers: number) {
+  updateViewers(viewers: number): void {
     this.viewers.next(viewers);
   }
 

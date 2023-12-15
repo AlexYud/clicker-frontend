@@ -1,22 +1,32 @@
 <ion-content class="ion-margin" color="medium">
 
-  <ion-card >
+  <ion-card>
     <ion-segment value="pricetags" (ionChange)="segmentChanged($event)">
       <ion-segment-button class="ion-no-margin ion-no-padding" value="pricetags">
-        <ion-icon name="pricetags" ></ion-icon>
+        <ion-icon name="pricetags"></ion-icon>
       </ion-segment-button>
       <ion-segment-button [disabled]="true" class="ion-no-margin ion-no-padding" value="cash">
-        <ion-icon name="cash" ></ion-icon>
+        <ion-icon name="cash"></ion-icon>
       </ion-segment-button>
       <ion-segment-button [disabled]="true" class="ion-no-margin ion-no-padding" value="sparkles">
-        <ion-icon name="sparkles" ></ion-icon>
+        <ion-icon name="sparkles"></ion-icon>
       </ion-segment-button>
     </ion-segment>
   </ion-card>
-    
+
   <ion-card class="ion-margin-top">
+    <ion-card-header class="ion-text-center" color="primary">
+      <ion-card-title>Lolja</ion-card-title>
+    </ion-card-header>
+    <ion-row class="ion-padding">
+      <ion-col size="4">
+        <ion-label><b>{{ isInteger(viewersPerSecond) }}</b> VPS</ion-label>
+      </ion-col>
+      <ion-col size="8" style="display: flex;">
+      </ion-col>
+    </ion-row>
     <ion-list>
-      <ion-item *ngFor="let item of items" lines="none">
+      <ion-item *ngFor=" let item of items" lines="none">
         <ion-thumbnail slot="start">
           <ion-img src="{{ item.img }}"></ion-img>
         </ion-thumbnail>
@@ -24,15 +34,17 @@
           <h2><b>{{ item.name }}</b></h2>
           <p>+{{ isInteger(item.views) }} viewers/s</p>
         </ion-label>
-        <ion-button color="success" *ngIf="viewers > item.unlockable" size="small" [disabled]="item.price > money" (click)="buyItem(item)">
+        <ion-button color="success" *ngIf="viewers > item.unlock" size="small" [disabled]="item.price > money"
+          (click)="buyItem(item)">
           <ion-label style="width: 90px; height: 50px">
             <h6><b>Upgrade</b></h6>
             <h1><b>$ {{ item.price }}</b></h1>
           </ion-label>
         </ion-button>
-        <ion-button color="danger" size="small" *ngIf="item.unlockable >= viewers" >
-          <ion-label *ngIf="item.unlockable >= viewers" style="width: 90px; height: 50px; display: flex" class="ion-justify-content-center ion-align-items-center">
-              <ion-icon name="lock-closed" size="large"></ion-icon>
+        <ion-button color="danger" size="small" *ngIf="item.unlock >= viewers">
+          <ion-label *ngIf="item.unlock >= viewers" style="width: 90px; height: 50px; display: flex"
+            class="ion-justify-content-center ion-align-items-center">
+            <ion-icon name="lock-closed" size="large"></ion-icon>
           </ion-label>
         </ion-button>
       </ion-item>

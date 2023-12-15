@@ -9,12 +9,15 @@ import { UtilsService } from 'src/app/services/utils.service';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent  implements OnInit {
+export class ProfileComponent implements OnInit {
   public viewersSubscription: Subscription = this.dataService.getViewers().subscribe((viewers: number) => this.viewers = viewers);
   public viewers: number = this.dataService.getViewersValue();
-  
+  public viewersPerSecond: number = this.dataService.getViewersPerSecond();
+
   public money: number = 0;
   public moneySubscription: Subscription = this.dataService.getMoney().subscribe((money: number) => this.money = money);
+
+  public multiplier: number = 1;
 
   public items: any[] = this.itemService.getItems();
 
@@ -23,7 +26,7 @@ export class ProfileComponent  implements OnInit {
     private itemService: ItemService,
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngOnDestroy() {
     this.viewersSubscription.unsubscribe();
@@ -36,6 +39,8 @@ export class ProfileComponent  implements OnInit {
 
   buyItem(item: any) {
     this.itemService.buyItem(item);
+    // Update VPS
+    this.viewersPerSecond = this.dataService.getViewersPerSecond();
   }
 
   isInteger(value: number) {
