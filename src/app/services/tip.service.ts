@@ -6,11 +6,11 @@ import { ChatService } from './chat.service';
 })
 export class TipService {
   private tips = [
-    { name: 'ice-cream', value: 10 }, 
-    { name: 'pizza', value: 25 }, 
-    { name: 'rocket', value: 50 },
-    { name: 'planet', value: 100 },
-    { name: 'diamond', value: 500 },
+    { name: 'ice-cream', value: 100 }, 
+    { name: 'pizza', value: 250 }, 
+    { name: 'rocket', value: 500 },
+    { name: 'planet', value: 1000 },
+    { name: 'diamond', value: 10000 },
   ];
 
   constructor(
@@ -30,23 +30,19 @@ export class TipService {
       default: break;
     }
 
-    chance = Math.floor(Math.random() * 100);
+    chance = Math.floor(Math.random() * 100) + 1;
     var multiplier = 1;
-
     switch (true) {
-      case chance < 10:
-        multiplier = 3;
-        break;
-      case chance < 50:
-        multiplier = 2;
-        break;
-      case chance < 100:
-        multiplier = 1;
-        break;
-      default:
-        break;
+      case chance < 2: multiplier = 100; break;
+      case chance < 6: multiplier = 10; break;
+      case chance < 11: multiplier = 5; break;
+      case chance < 51: multiplier = 2; break;
+      case chance < 101: multiplier = 1; break;
+      default: break;
     }
+
     const spectator = this.chatService.getRandomSpectator();
+
     return {
       id: spectator.id,
       img: spectator.img,
