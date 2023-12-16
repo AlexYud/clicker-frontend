@@ -77,7 +77,7 @@ export class ItemService {
   buyItem(item: any) {
     this.dataService.updateViewersPerSecond(item.totalViews ? item.totalViews : item.views);
     this.dataService.updateMoney(-(item.totalPrice ? item.totalPrice : item.price));
-    const itemToUpdate = this.items.find(item => item.id === item.id);
+    const itemToUpdate = this.items.find(_item => _item.id === item.id);
     itemToUpdate.price += Math.floor(item.totalPrice ? item.totalPrice : item.price * 0.5);
     itemToUpdate.views += (item.totalViews ? item.totalViews : item.views * 0.2);
   }
