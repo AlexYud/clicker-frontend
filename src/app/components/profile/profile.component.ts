@@ -33,24 +33,9 @@ export class ProfileComponent implements OnInit {
     this.moneySubscription.unsubscribe();
   }
 
-  handleMultiplier(multiplier: number) {
-    let tab = document.getElementById('multiplierTab');
-    let currentButton = <HTMLElement> tab?.querySelector("ion-button.activated");
-    
-
-    if (currentButton && !currentButton.innerText.includes(multiplier.toString())) {
-      this.multiplier = multiplier
-      currentButton.classList.remove('activated')
-      let buttons = tab?.getElementsByTagName('ion-button')
-  
-      if (buttons) {
-        for (let i = 0; i < buttons?.length; i++) {
-          if (buttons[i].innerText.includes(multiplier.toString() + 'X')) {
-            buttons[i].classList.add('activated')
-          } 
-        }
-      }
-    } 
+  changeMultiplierValue(newValue: number) {
+    this.multiplier = newValue;
+    this.items = this.itemService.multiplyMask(newValue);
   }
 
   segmentChanged(event: any) {
@@ -59,8 +44,8 @@ export class ProfileComponent implements OnInit {
 
   buyItem(item: any) {
     this.itemService.buyItem(item);
-    // Update VPS
-    this.viewersPerSecond = this.dataService.getViewersPerSecond();
+    this.items = this.itemService.multiplyMask(this.multiplier); // Update mask
+    this.viewersPerSecond = this.dataService.getViewersPerSecond(); // Update VPS
   }
 
   isInteger(value: number) {

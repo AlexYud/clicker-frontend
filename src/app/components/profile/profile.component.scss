@@ -1,23 +1,25 @@
-.multiplier-button-left {
+.btn-multiplier {
     --box-shadow: none;
+    border: solid 0.01em;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.multiplier-button-left {
     width: 43px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    margin-right: 0;
     --border-radius: 10px 0px 0px 10px;
 }
 
 .multiplier-button-middle {
-    --box-shadow: none;
     width: 40px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    margin-left: 0;  
+    margin-right: 0;
 }
 
 .multiplier-button-right {
-    --box-shadow: none;
     width: 43px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    margin-left: 0;
     --border-radius: 0px 10px 10px 0px;
 }
 

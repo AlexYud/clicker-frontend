@@ -48,18 +48,37 @@ export class ItemService {
     },
   ]
 
+  private itemsMultipliedData: any[] = [];
+
   constructor(
     private dataService: DataService,
   ) { }
-  
+
   getItems() {
     return this.items;
   }
 
+  multiplyMask(multiplier: number) {
+    this.itemsMultipliedData = structuredClone(this.items);
+    for (let index = 0; index < this.itemsMultipliedData.length; index++) {
+      const item = this.itemsMultipliedData[index];
+      item.totalPrice = item.price;
+      item.totalViews = item.views;
+      for (let index = 0; index < multiplier - 1; index++) {
+        item.price += Math.floor(item.price * 0.5);
+        item.views += (item.views * 0.2);
+        item.totalPrice += item.price;
+        item.totalViews += item.views;
+      }
+    }
+    return this.itemsMultipliedData;
+  }
+
   buyItem(item: any) {
-    this.dataService.updateViewersPerSecond(item.views);
-    this.dataService.updateMoney(-item.price);
-    item.price += Math.floor(item.price * 0.5);
-    item.views += (item.views * 0.2);
+    this.dataService.updateViewersPerSecond(item.totalViews ? item.totalViews : item.views);
+    this.dataService.updateMoney(-(item.totalPrice ? item.totalPrice : item.price));
+    const itemToUpdate = this.items.find(item => item.id === item.id);
+    itemToUpdate.price += Math.floor(item.totalPrice ? item.totalPrice : item.price * 0.5);
+    itemToUpdate.views += (item.totalViews ? item.totalViews : item.views * 0.2);
   }
 }

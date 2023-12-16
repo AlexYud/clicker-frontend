@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class DataService {
   private viewers: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  private viewersPerSecond: number = 0;
+  private viewersPerSecond: number = 100;
   private money: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   private moneyPerSecond: number = 0;
 
