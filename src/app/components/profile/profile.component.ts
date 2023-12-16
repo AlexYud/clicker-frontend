@@ -34,17 +34,22 @@ export class ProfileComponent implements OnInit {
   }
 
   changeMultiplierValue(newValue: number) {
+    if (newValue == this.multiplier) {
+      return
+    }
     this.multiplier = newValue;
-    this.items = this.itemService.multiplyMask(newValue);
+  }
+
+  calculateMask(value: any, multiplier: number, proportion: number, isViewers: boolean) {
+    return isViewers ? value * ((Math.pow(proportion, multiplier) - 1) / (proportion - 1)) : Math.floor(value * ((Math.pow(proportion, multiplier) - 1) / (proportion - 1)));
   }
 
   segmentChanged(event: any) {
     // console.log(event.target.value);
-  }
+  } 
 
   buyItem(item: any) {
-    this.itemService.buyItem(item);
-    this.items = this.itemService.multiplyMask(this.multiplier); // Update mask
+    this.itemService.buyItem(item, this.multiplier);
     this.viewersPerSecond = this.dataService.getViewersPerSecond(); // Update VPS
   }
 

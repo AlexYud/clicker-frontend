@@ -43,13 +43,13 @@
         </ion-thumbnail>
         <ion-label>
           <h2><b>{{ item.name }}</b></h2>
-          <p>+{{ isInteger(item.totalViews ? item.totalViews : item.views) }} viewers/s</p>
+          <p>+{{ isInteger(calculateMask(item.views, multiplier, 1.2, true)) }} viewers/s</p>
         </ion-label>
-        <ion-button color="success" *ngIf="viewers > item.unlock" size="small" [disabled]="(item.totalPrice ? item.totalPrice : item.price) > money"
+        <ion-button color="success" *ngIf="viewers > item.unlock" size="small" [disabled]="calculateMask(item.price ,multiplier, 1.5, false) > money"
           (click)="buyItem(item)">
           <ion-label style="width: 90px; height: 50px">
             <h6><b>Upgrade</b></h6>
-            <h1><b>$ {{ item.totalPrice ? item.totalPrice : item.price }}</b></h1>
+            <h1><b>$ {{ calculateMask(item.price ,multiplier, 1.5, false) }}</b></h1>
           </ion-label>
         </ion-button>
         <ion-button color="danger" size="small" *ngIf="item.unlock >= viewers">

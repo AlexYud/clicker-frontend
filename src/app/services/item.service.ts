@@ -48,8 +48,6 @@ export class ItemService {
     },
   ]
 
-  private itemsMultipliedData: any[] = [];
-
   constructor(
     private dataService: DataService,
   ) { }
@@ -58,27 +56,10 @@ export class ItemService {
     return this.items;
   }
 
-  multiplyMask(multiplier: number) {
-    this.itemsMultipliedData = structuredClone(this.items);
-    for (let index = 0; index < this.itemsMultipliedData.length; index++) {
-      const item = this.itemsMultipliedData[index];
-      item.totalPrice = item.price;
-      item.totalViews = item.views;
-      for (let index = 0; index < multiplier - 1; index++) {
-        item.price += Math.floor(item.price * 0.5);
-        item.views += (item.views * 0.2);
-        item.totalPrice += item.price;
-        item.totalViews += item.views;
-      }
-    }
-    return this.itemsMultipliedData;
-  }
-
-  buyItem(item: any) {
-    this.dataService.updateViewersPerSecond(item.totalViews ? item.totalViews : item.views);
-    this.dataService.updateMoney(-(item.totalPrice ? item.totalPrice : item.price));
-    const itemToUpdate = this.items.find(_item => _item.id === item.id);
-    itemToUpdate.price += Math.floor(item.totalPrice ? item.totalPrice : item.price * 0.5);
-    itemToUpdate.views += (item.totalViews ? item.totalViews : item.views * 0.2);
+  buyItem(item: any, multiplier: number) {
+    this.dataService.updateViewersPerSecond(item.views * ((Math.pow(1.2, multiplier) - 1) / (1.2 - 1)));
+    this.dataService.updateMoney(-(Math.floor(item.price * ((Math.pow(1.5, multiplier) - 1) / (1.5 - 1)))));
+    item.price = Math.floor(item.price * Math.pow((1 + 0.5), multiplier));
+    item.views = item.views * Math.pow((1 + 0.2), multiplier);
   }
 }
