@@ -32,7 +32,7 @@ export class HomePage {
     private dataService: DataService,
     private chatService: ChatService,
     private tipService: TipService,
-    private utilsService: UtilsService,
+    public utilsService: UtilsService,
   ) { }
 
   ngOnInit() {
@@ -45,10 +45,6 @@ export class HomePage {
   ngOnDestroy() {
     this.viewersSubscription.unsubscribe();
     this.moneySubscription.unsubscribe();
-  }
-
-  mathFloor(value: number) {
-    return this.utilsService.mathFloor(value);
   }
 
   async openProfileModal() {

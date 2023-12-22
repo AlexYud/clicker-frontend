@@ -24,6 +24,7 @@ export class ProfileComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private itemService: ItemService,
+    public utilsService: UtilsService,
   ) { }
 
   ngOnInit() { }
@@ -46,10 +47,5 @@ export class ProfileComponent implements OnInit {
     this.itemService.buyItem(item);
     this.items = this.itemService.multiplyMask(this.multiplier); // Update mask
     this.viewersPerSecond = this.dataService.getViewersPerSecond(); // Update VPS
-  }
-
-  isInteger(value: number) {
-    if (Number.isInteger(value)) return value;
-    return value.toFixed(2);
   }
 }

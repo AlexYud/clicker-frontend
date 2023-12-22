@@ -1,4 +1,7 @@
-<ion-content [scrollY]="false" [fullscreen]="true" [color]="isCameraOn ? 'dark' : ''">
+<ion-content [scrollY]="false" [fullscreen]="true" [color]="isCameraOn ? 'dark' : ''"
+  class="ion-activatable ripple-parent">
+  <ion-ripple-effect style="color: #3880ff;"></ion-ripple-effect>
+
   <div id="cameraPreview" (click)="addClick()">
     <ion-fab slot="fixed" vertical="top" horizontal="end">
       <ion-fab-button size="small" color="light" (click)="toggleCamera()">
@@ -15,7 +18,7 @@
             </ion-avatar>
             <ion-label>
               <h3><b><ion-text color="medium">{{ playerName }}</ion-text></b></h3>
-              <p><b><ion-text color="light">$ {{ money }}</ion-text></b></p>
+              <p><b><ion-text color="light">$ {{ utilsService.numberMask(money) }}</ion-text></b></p>
             </ion-label>
             <ion-button class="ion-no-margin" size="larger" color="light"
               (click)="openProfileModal()">Upgrade</ion-button>
@@ -27,7 +30,7 @@
           <ion-item lines="none">
             <ion-badge class="ion-margin-end" color="danger">LIVE</ion-badge>
             <ion-icon style="margin-right: 5px;" name="eye-outline" color="light"></ion-icon>
-            <ion-label><ion-text color="light">{{ mathFloor(viewers) }}</ion-text></ion-label>
+            <ion-label><ion-text color="light">{{ utilsService.numberMask(viewers) }}</ion-text></ion-label>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -38,7 +41,7 @@
 
       <ion-row>
         <ion-col style="height: 15vh;">
-          <ion-item *ngFor="let tip of lastTip" lines="none">
+          <ion-item *ngFor="let tip of lastTip" class="swing-right-bck" lines="none">
             <ion-avatar aria-hidden="true" slot="start">
               <img alt="viewer img" src="{{tip.img}}" />
             </ion-avatar>
@@ -46,8 +49,9 @@
               <h3><b><ion-text color="medium">{{tip.name}}</ion-text></b></h3>
               <ion-note style="font-size: 0.65em;"><ion-text color="light">Enviou {{tip.icon}}</ion-text></ion-note>
             </ion-label>
-            <ion-icon size="large" color="warning" name="{{tip.icon}}" style="font-size: 20em;"></ion-icon>
-            <ion-title><i><ion-text color="warning">x{{tip.multiplier}}</ion-text></i></ion-title>
+            <ion-icon size="large" color="warning" class="slide-bck-left" name="{{tip.icon}}"
+              style="font-size: 20em;"></ion-icon>
+            <ion-title class="slide-bck-left"><i><ion-text color="warning">x{{tip.multiplier}}</ion-text></i></ion-title>
           </ion-item>
         </ion-col>
       </ion-row>
