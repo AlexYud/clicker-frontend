@@ -32,7 +32,7 @@ ion-item {
 }
 
 .swing-right-bck {
-  animation: swing-right-bck .6s cubic-bezier(.25, .46, .45, .94) both
+  animation: swing-right-bck .3s cubic-bezier(.25, .46, .45, .94) both
 }
 
 /* ----------------------------------------------
@@ -53,5 +53,5 @@ ion-item {
 }
 
 .slide-bck-left {
-  animation: slide-bck-left .9s cubic-bezier(.47, 0.000, .745, .715) both
+  animation: slide-bck-left .4s cubic-bezier(.47, 0.000, .745, .715) both
 }

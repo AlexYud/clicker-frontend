@@ -24,13 +24,13 @@
       </ion-col>
       <ion-col size="5" >
         <div style="display: flex; justify-content: center; align-content: center;">
-          <ion-button size="small" class="btn-multiplier multiplier-button-left" [ngClass]="{'activated' : multiplier === 1 ? true : false}" (click)="changeMultiplierValue(1)">
+          <ion-button size="small" class="btn-multiplier multiplier-button-left" [ngClass]="{'activated' : multiplier === 1}" (click)="changeMultiplierValue(1)">
            x1
           </ion-button>
-          <ion-button size="small" expand="full" class="btn-multiplier multiplier-button-middle" [ngClass]="{'activated' : multiplier === 5 ? true : false}" (click)="changeMultiplierValue(5)">
+          <ion-button size="small" expand="full" class="btn-multiplier multiplier-button-middle" [ngClass]="{'activated' : multiplier === 5}" (click)="changeMultiplierValue(5)">
            x5
           </ion-button>
-          <ion-button size="small" class="btn-multiplier multiplier-button-right" [ngClass]="{'activated' : multiplier === 10 ? true : false}" (click)="changeMultiplierValue(10)">
+          <ion-button size="small" class="btn-multiplier multiplier-button-right" [ngClass]="{'activated' : multiplier === 10}" (click)="changeMultiplierValue(10)">
            x10
           </ion-button>
         </div>
