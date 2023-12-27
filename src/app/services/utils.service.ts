@@ -36,9 +36,13 @@ export class UtilsService {
     toast.present();
   }
 
-  mathFloor(value: number) {
-    return Math.floor(value);
+  numberMask(value: number): string {
+    var sizes = ['', 'k', 'M', 'B', 'T', 'Qa', 'Qi', 'Sx', 'Sp', 'Oc'];
+    if (value < 1000) {
+      if (Number.isInteger(value)) return value.toString();
+      return value.toFixed(2);
+    }
+    var i = Math.floor(Math.log(value) / Math.log(1000));
+    return ((i == 0) ? (value / Math.pow(1000, i)) : (value / Math.pow(1000, i)).toFixed(1)) + ' ' + sizes[i];
   }
-
-  // numberMask(value: number) { }
 }

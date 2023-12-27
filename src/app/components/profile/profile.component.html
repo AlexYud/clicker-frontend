@@ -20,17 +20,17 @@
     </ion-card-header>
     <ion-row class="ion-no-padding ion-no-margin ion-align-items-center">
       <ion-col size="7" class="ion-padding">
-        <ion-label><b>{{ isInteger(viewersPerSecond) }}</b> VPS (idle)</ion-label>
+        <ion-label><b>{{ utilsService.numberMask(viewersPerSecond) }}</b> VPS (idle)</ion-label>
       </ion-col>
       <ion-col size="5" >
         <div style="display: flex; justify-content: center; align-content: center;">
-          <ion-button size="small" class="btn-multiplier multiplier-button-left" [ngClass]="{'activated' : multiplier === 1 ? true : false}" (click)="changeMultiplierValue(1)">
+          <ion-button size="small" class="btn-multiplier multiplier-button-left" [ngClass]="{'activated' : multiplier === 1}" (click)="changeMultiplierValue(1)">
            x1
           </ion-button>
-          <ion-button size="small" expand="full" class="btn-multiplier multiplier-button-middle" [ngClass]="{'activated' : multiplier === 5 ? true : false}" (click)="changeMultiplierValue(5)">
+          <ion-button size="small" expand="full" class="btn-multiplier multiplier-button-middle" [ngClass]="{'activated' : multiplier === 5}" (click)="changeMultiplierValue(5)">
            x5
           </ion-button>
-          <ion-button size="small" class="btn-multiplier multiplier-button-right" [ngClass]="{'activated' : multiplier === 10 ? true : false}" (click)="changeMultiplierValue(10)">
+          <ion-button size="small" class="btn-multiplier multiplier-button-right" [ngClass]="{'activated' : multiplier === 10}" (click)="changeMultiplierValue(10)">
            x10
           </ion-button>
         </div>
@@ -43,20 +43,17 @@
         </ion-thumbnail>
         <ion-label>
           <h2><b>{{ item.name }}</b></h2>
-          <p>+{{ isInteger(calculateMask(item.views, multiplier, 1.2, true)) }} viewers/s</p>
+          <p>+{{ utilsService.numberMask(calculateMask(item.views, multiplier, 1.2, true)) }} viewers/s</p>
         </ion-label>
-        <ion-button color="success" *ngIf="viewers > item.unlock" size="small" [disabled]="calculateMask(item.price ,multiplier, 1.5, false) > money"
+        <ion-button *ngIf="viewers > item.unlock" color="success" class="flip-scale-2-hor-bottom" [disabled]="calculateMask(item.price ,multiplier, 1.5, false) > money" style="width: 30vw; height: 6vh"
           (click)="buyItem(item)">
-          <ion-label style="width: 90px; height: 50px">
+          <ion-label>
             <h6><b>Upgrade</b></h6>
-            <h1><b>$ {{ calculateMask(item.price ,multiplier, 1.5, false) }}</b></h1>
+            <h2><b>$ {{ utilsService.numberMask(calculateMask(item.price ,multiplier, 1.5, false)) }}</b></h2>
           </ion-label>
         </ion-button>
-        <ion-button color="danger" size="small" *ngIf="item.unlock >= viewers">
-          <ion-label *ngIf="item.unlock >= viewers" style="width: 90px; height: 50px; display: flex"
-            class="ion-justify-content-center ion-align-items-center">
-            <ion-icon name="lock-closed" size="large"></ion-icon>
-          </ion-label>
+        <ion-button *ngIf="item.unlock >= viewers" color="danger" style="width: 30vw; height: 6vh">
+          <ion-icon slot="icon-only" name="lock-closed" size="large" ></ion-icon>
         </ion-button>
       </ion-item>
     </ion-list>
