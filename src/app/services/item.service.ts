@@ -58,8 +58,8 @@ export class ItemService {
 
   buyItem(item: any, multiplier: number) {
     this.dataService.updateViewersPerSecond(item.views * ((Math.pow(1.2, multiplier) - 1) / (1.2 - 1)));
-    this.dataService.updateMoney(-(Math.floor(item.price * ((Math.pow(1.5, multiplier) - 1) / (1.5 - 1)))));
-    item.price = Math.floor(item.price * Math.pow((1 + 0.5), multiplier));
+    this.dataService.updateMoney(-(Math.floor(item.price * ((Math.pow(1.2, multiplier) - 1) / (1.2 - 1)))));
+    item.price = Math.floor(item.price * Math.pow((1 + 0.2), multiplier));
     item.views = item.views * Math.pow((1 + 0.2), multiplier);
   }
 }
