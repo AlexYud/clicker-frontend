@@ -1,0 +1,43 @@
+<ion-row class="ion-no-padding ion-no-margin ion-align-items-center">
+  <ion-col size="7" class="ion-padding">
+    <ion-label><b>{{ utilsService.numberMask(viewersPerSecond) }}</b> VPS (idle)</ion-label>
+  </ion-col>
+  <ion-col size="5">
+    <div style="display: flex; justify-content: center; align-content: center;">
+      <ion-button size="small" class="btn-multiplier multiplier-button-left"
+        [ngClass]="{'activated' : multiplier === 1}" (click)="changeMultiplierValue(1)">
+        x1
+      </ion-button>
+      <ion-button size="small" expand="full" class="btn-multiplier multiplier-button-middle"
+        [ngClass]="{'activated' : multiplier === 5}" (click)="changeMultiplierValue(5)">
+        x5
+      </ion-button>
+      <ion-button size="small" class="btn-multiplier multiplier-button-right"
+        [ngClass]="{'activated' : multiplier === 10}" (click)="changeMultiplierValue(10)">
+        x10
+      </ion-button>
+    </div>
+  </ion-col>
+</ion-row>
+<ion-list class="ion-no-padding" style="overflow-y: auto; height: 42vh;">
+  <ion-item *ngFor=" let item of items" lines="none">
+    <ion-thumbnail slot="start">
+      <ion-img src="{{ item.img }}"></ion-img>
+    </ion-thumbnail>
+    <ion-label>
+      <h2><b>{{ item.name }}</b></h2>
+      <p>+{{ utilsService.numberMask(calculateMask(item.views, multiplier, 1.2, true)) }} viewers/s</p>
+    </ion-label>
+    <ion-button *ngIf="viewers > item.unlock" color="success" class="flip-scale-2-hor-bottom"
+      [disabled]="calculateMask(item.price ,multiplier, 1.2, false) > money" style="width: 30vw; height: 6vh"
+      (click)="buyItem(item)">
+      <ion-label>
+        <h6><b>Upgrade</b></h6>
+        <h2><b>$ {{ utilsService.numberMask(calculateMask(item.price ,multiplier, 1.2, false)) }}</b></h2>
+      </ion-label>
+    </ion-button>
+    <ion-button *ngIf="item.unlock >= viewers" color="danger" style="width: 30vw; height: 6vh">
+      <ion-icon slot="icon-only" name="lock-closed" size="large"></ion-icon>
+    </ion-button>
+  </ion-item>
+</ion-list>
